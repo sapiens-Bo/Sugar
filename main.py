@@ -24,7 +24,7 @@ cur.execute("""CREATE TABLE IF NOT EXISTS remaind(
 cur.execute("""CREATE TABLE IF NOT EXISTS how(
             terminal REAL,
             cash REAL,
-            mobile bank, REAL
+            mobile bank REAL
 );""")
 
 main_db.commit()
@@ -32,6 +32,11 @@ main_db.commit()
 tables = ['start', 'sales', 'remaind', 'how']
 
 how_list = ['t', 'c', 'mb']
+
+
+terminal = 0
+cash = 0
+mob_bank = 0
 
 # Добавить новую запись в таблицу старт.
 def addInStart(name: str, total: int, price: float):
@@ -54,14 +59,13 @@ def sale(how: str, name: str, total: int):
             pass
     else:
         if how in how_list:
-        # отнимаем количество у name из start
             cur.execute('SELECT total FROM start WHERE name = ?', (name, ))
             old_total = cur.fetchone()
             print(old_total)
             if old_total[0] >= total:
+                # отнимаем количество у name из start
                 new_total = old_total[0] - total
                 cur.execute('UPDATE start SET total = ? WHERE name = ?', (new_total, name))
-                main_db.commit()
                 cur.execute('SELECT price FROM start WHERE name = ?', (name, ))
                 price_table = cur.fetchone()
                 price = price_table[0]
@@ -69,13 +73,13 @@ def sale(how: str, name: str, total: int):
                 # вставляем данные в таблицу sales
                 cur.execute('SELECT * FROM sales WHERE how = ? AND name = ?', (how, name))
                 sales = cur.fetchall()
-                print(len(sales), sales)
-                *a, t, s = sales[0]
-                t += total
+                
                 if len(sales) < 1:
-                    cur.execute('INSERT INTO sales VALUES(?, ?, ?, ?)', (how, name, total, price * t))
+                    cur.execute('INSERT INTO sales VALUES(?, ?, ?, ?)', (how, name, total, price * total))
                     main_db.commit()
                 else:
+                    *a, t, s = sales[0]
+                    t += total
                     cur.execute('UPDATE sales SET total = ?, sum = ? WHERE how = ? AND name = ?', (t, price * t, how, name))
                     main_db.commit()
             else:
@@ -84,10 +88,21 @@ def sale(how: str, name: str, total: int):
         else:
             # Ввели неизвестный способ оплаты
             pass
+        calcHow()
         
 
                  
-        
+def calcHow():
+    global terminal
+    global cash
+    global mob_bank
+    
+    cur.execute('SELECT how, sum FROM sales')
+    sales = cur.fetchall()
+    for how, sum in sales:
+        if how == 't': terminal += sum
+        elif how == 'c': cash += sum
+        elif how == 'mb': mob_bank += sum
 
 def calcRemaind(name: str, sum: float):pass
     
@@ -98,6 +113,12 @@ def delFromStart(name: str):
 def outputTable(name: str):
     if name == 'start':
         cur.execute('SELECT * FROM start')
+        table = cur.fetchall()
+        table = [str(i) for i in table]
+        str_table = '\n'.join(table)
+        return str_table
+    elif name =='sales':
+        cur.execute('SELECT * FROM sales')
         table = cur.fetchall()
         table = [str(i) for i in table]
         str_table = '\n'.join(table)
@@ -113,7 +134,7 @@ def outputTable(name: str):
 #sale('t', 'Tano', 1)
 # cur.execute('SELECT total FROM start WHERE  name = ?', ('Amo', ))
 
-print(outputTable('start'))
+#print(outputTable('start'))
 
 # print(a)
 # cur.execute('DELETE FROM start')
