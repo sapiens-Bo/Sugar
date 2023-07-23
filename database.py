@@ -54,4 +54,5 @@ def calcResult():
     sum = terminal + cash + mob_bank
 
 def delPos(name):
-    pass
+    cursor.execute(f'DELETE * FROM {name}')
+    sugardb.commit()
