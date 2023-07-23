@@ -21,13 +21,6 @@ mob_bank = 0
 sum = 0
 
 # СУБД
-def addInComing(pos: list):
-    t = tuple(pos)
-    cursor.execute(f'SELECT name FROM coming WHERE name={pos[0]}')
-    if cursor.fetchone() is None:
-        cursor.execute('INSERT INTO coming VALUES (?, ?, ?, ?, ?, ?)', t)
-        sugardb.commit()
-
 def addSales(sale):
     name, total, price, how = sale
     cursor.execute('INSERT INTO sales VALUES (?, ?, ?, ?)', (name, int(total), float(price), how))
@@ -54,5 +47,5 @@ def calcResult():
     sum = terminal + cash + mob_bank
 
 def delPos(name):
-    cursor.execute(f'DELETE * FROM {name}')
+    cursor.execute(f'DELETE FROM {name}')
     sugardb.commit()
