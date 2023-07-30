@@ -1,0 +1,58 @@
+#: import utils kivy.utils
+
+<Menu>
+    name: 'Menu'
+
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        padding: 0
+        spacing: 50
+
+
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 0
+            spacing: 0
+
+            Button:
+                text: 'Menu'
+                size_hint: (0.2, 1)
+                pos_hint: {'center_x' : 0.1}
+                background_color: (154/255.0, 197/255.0, 229/255.0, 1)
+                canvas.before:
+                    Color:
+                        rgba: self.background_color
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            
+            Label:
+                text: 'SUGAR CO'
+                size_hint: (0.8, 1)
+                pos_hint: {'center_x' : 0.9}
+                background_color: (154/255.0, 197/255.0, 229/255.0, 1)
+                canvas.before:
+                    Color:
+                        rgba: self.background_color
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                #Text properties
+                font_size: 32
+                color: utils.get_color_from_hex('#C98C9A')
+                bold: True
+                italic: True
+                outline_color: (1, 1, 1)
+                outline_width: 1
+
+
+        Button:
+            text: 'Sale'
+            on_press: root.manager.current = 'Sale'
+
+        Button:
+            text: 'Sales'
+
+        Button:
+            text: 'result'

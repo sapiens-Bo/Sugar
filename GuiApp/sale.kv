@@ -1,0 +1,51 @@
+<Sale>
+    name: 'Sale'
+
+    total: total
+    # price: price
+    # how: how
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Button:
+                text: 'Menu'
+                size_hint: (0.2, 1)
+                pos_hint: {'center_x' : 0.1}
+                background_color: (154/255.0, 197/255.0, 229/255.0, 1)
+                canvas.before:
+                    Color:
+                        rgba: self.background_color
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                on_press: root.manager.current = 'Menu'
+            Label:
+                text: 'SUGAR CO'
+                size_hint: (0.8, 1)
+                pos_hint: {'center_x' : 0.9}
+                background_color: (154/255.0, 197/255.0, 229/255.0, 1)
+                canvas.before:
+                    Color:
+                        rgba: self.background_color
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                #Text properties
+                font_size: 32
+                color: utils.get_color_from_hex('#C98C9A')
+                bold: True
+                italic: True
+                outline_color: (1, 1, 1)
+                outline_width: 1
+        
+        Label:
+            text: 'Количество'
+        TextInput:
+            id: total
+            multiline: False
+
+            
