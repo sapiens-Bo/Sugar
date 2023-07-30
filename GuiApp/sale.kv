@@ -2,8 +2,8 @@
     name: 'Sale'
 
     total: total
-    # price: price
-    # how: how
+    price: price
+    how: how
 
     BoxLayout:
         orientation: 'vertical'
@@ -44,8 +44,28 @@
         
         Label:
             text: 'Количество'
+            color: (0,0,0,1)
         TextInput:
             id: total
             multiline: False
+        
+        Label:
+            text: 'Цена'
+            color: (0,0,0,1)
+        TextInput:
+            id: price
+            multiline: False
+
+        Label:
+            text: 'Как'
+            color: (0,0,0,1)
+        TextInput:
+            id: how
+            multiline: False
+        
+        Button:
+            text: 'Sale!'
+            on_press: root.btnSale()
+
 
             

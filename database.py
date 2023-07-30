@@ -5,7 +5,6 @@ cursor = sugardb.cursor()
 
 # создание таблиц
 cursor.execute("""CREATE TABLE IF NOT EXISTS sales (
-               name TEXT,
                total INT,
                price REAL,
                how TEXT
@@ -21,9 +20,8 @@ mob_bank = 0
 sum = 0
 
 # СУБД
-def addSales(sale):
-    name, total, price, how = sale
-    cursor.execute('INSERT INTO sales VALUES (?, ?, ?, ?)', (name, int(total), float(price), how))
+def addSales(total, price, how):
+    cursor.execute('INSERT INTO sales VALUES (?, ?, ?)', (int(total), float(price), how))
     sugardb.commit()
 
 def outTable(name):
