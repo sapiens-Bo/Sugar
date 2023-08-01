@@ -10,6 +10,8 @@
 
         BoxLayout:
             orientation: 'horizontal'
+            size_hint_y: None
+            size: root.width, 40
 
             Button:
                 text: 'Menu'
@@ -24,7 +26,7 @@
                         pos: self.pos
                 on_press: root.manager.current = 'Menu'
             Label:
-                text: 'SUGAR CO'
+                text: 'SAHAR CO'
                 size_hint: (0.8, 1)
                 pos_hint: {'center_x' : 0.9}
                 background_color: (154/255.0, 197/255.0, 229/255.0, 1)
@@ -66,6 +68,12 @@
         Button:
             text: 'Sale!'
             on_press: root.btnSale()
-
+        
+        Label:
+            id: res
+            text: 'Терминал: 0\nНаличные: 0\nМобильный банк: 0\nВсего: 0'
+            color: (0,0,0,1)
+            size_hint_y: None
+            size: root.width, 200
 
             

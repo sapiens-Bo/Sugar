@@ -1,14 +1,8 @@
-#: import utils kivy.utils
-
-<Menu>
-    name: 'Menu'
+<Sales>
+    name: 'Sales'
 
     BoxLayout:
         orientation: 'vertical'
-        size: root.width, root.height
-        padding: 0
-        spacing: 50
-
 
         BoxLayout:
             orientation: 'horizontal'
@@ -24,9 +18,9 @@
                     Color:
                         rgba: self.background_color
                     Rectangle:
-                        size: self.size
+                        size: self.size                            
                         pos: self.pos
-            
+                on_press: root.manager.current = 'Menu'
             Label:
                 text: 'SAHAR CO'
                 size_hint: (0.8, 1)
@@ -46,15 +40,13 @@
                 outline_color: (1, 1, 1)
                 outline_width: 1
 
+        Label:
+            id: table
+            text: 'Hi'
+            size_hint: (1, .9)
+            color: (0,0,0,1)
 
         Button:
-            text: 'Sale'
-            on_press: root.manager.current = 'Sale'
-
-        Button:
-            text: 'Sales'
-            on_press: root.manager.current = 'Sales'
-
-        Button:
-            text: 'Clear sales'
-            on_press: root.clearTable()
+            text: 'Update'
+            size_hint: (1, .1)
+            on_press: root.updateScr()      
