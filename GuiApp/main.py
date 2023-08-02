@@ -6,7 +6,6 @@ import sys
 sys.path.append('..')
 from scr_menu import Menu
 from scr_sale import Sale
-from scr_result import Result
 from scr_sales import Sales
 
 class SugarApp(App):
