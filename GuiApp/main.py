@@ -10,7 +10,6 @@ from scr_sales import Sales
 
 class SugarApp(App):
     def build(self):
-        Window.size = 380, 800
         Window.clearcolor = (1,1,1,1)
         sm = ScreenManager()
         sm.add_widget(Menu())
